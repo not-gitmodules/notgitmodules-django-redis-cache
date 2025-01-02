@@ -1,5 +1,5 @@
 from django.core.cache import cache
-
+from typing import Optional
 
 class Cache:
     """
@@ -16,11 +16,12 @@ class Cache:
     def __init__(self, ttl: str | int):
         self.ttl = ttl if isinstance(ttl, int) else int(ttl)
 
-    def add_instance(self, instance_id, instance: list[object]) -> None:
+    def add_instance(self, instance_id, instance: list[object], ttl: Optional[int] = None) -> None:
         """
         Adds the model instance to the cache with a TTL.
+        :param ttl (optional): The time to live for the instance in the cache. If not provided, the default TTL is used.
         """
-        cache.set(instance_id, instance, timeout=self.ttl)
+        cache.set(instance_id, instance, timeout=ttl if ttl else self.ttl)
 
     def get_instance(self, instance_id) -> list[object] | None:
         """
