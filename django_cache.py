@@ -21,7 +21,7 @@ class Cache:
         Adds the model instance to the cache with a TTL.
         :param ttl (optional): The time to live for the instance in the cache. If not provided, the default TTL is used.
         """
-        cache.set(instance_id, instance, timeout=ttl if ttl else self.ttl)
+        cache.set(instance_id, instance, timeout=int(ttl) if ttl else self.ttl)
 
     def get_instance(self, instance_id) -> list[object] | None:
         """
