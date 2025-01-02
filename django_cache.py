@@ -27,3 +27,9 @@ class Cache:
         Returns the model instance from the cache.
         """
         return cache.get(instance_id)
+
+    def delete_instance(self, instance_id) -> None:
+        """
+        Deletes the model instance from the cache.
+        """
+        cache.delete(instance_id)
